@@ -56,6 +56,32 @@ public class Aufgabe2 {
 	 */
 	public static int[][] andyWarhol(int[][] pixels) {
 		// TODO: implement me!
+
+		for (int i = 0; i < pixels.length; i++) {
+			for (int j = 0; j < pixels[i].length; j++) {
+
+				// Get the red, green and blue percentage of each pixel.
+				int red = Colors.getR(pixels[i][j]);
+				int green = Colors.getG(pixels[i][j]);
+				int blue = Colors.getB(pixels[i][j]);
+
+				// Make the first area red and set other colors to zero. 
+				if (i < (pixels.length / 3)) {
+					pixels[i][j] = Colors.toRGB(red, 0, 0);
+				}
+
+				// Make the second area green and set other colors to zero.
+				if (i >= (pixels.length / 3) && i < (2 * pixels.length) / 3) {
+					pixels[i][j] = Colors.toRGB(0, green, 0);
+				}
+
+				// Make the third area blue and set other colors to zero.
+				if (i >= (2 * pixels.length) / 3) {
+					pixels[i][j] = Colors.toRGB(0, 0, blue);
+				}
+			}
+		}
+
 		return pixels;
 	}
 
