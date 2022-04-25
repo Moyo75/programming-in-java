@@ -15,7 +15,7 @@ public class Aufgabe2 {
 	public static int convertColorToGrayscale(int rgb) {
 		// TODO: implement me!
 
-		return rgb;
+		return rgb / 3;
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class Aufgabe2 {
 				int blue = Colors.getB(pixels[i][j]);
 
 				// Get the average of them all.
-				int nummer = (red + green + blue) / 3;
+				int nummer = convertColorToGrayscale(red + green + blue);
 
 				// Set the current pixel to the average value of red, blue and green..
 				pixels[i][j] = Colors.toRGB(nummer, nummer, nummer);
