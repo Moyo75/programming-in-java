@@ -96,6 +96,15 @@ public class Aufgabe2 {
 	 */
 	public static int[][] drawBorderOnPicture(int[][] pixels, int borderWidth, int borderColor) {
 		// TODO: implement me!
+		for (int i = 0; i < pixels.length; i++) {
+			for (int j = 0; j < pixels[i].length; j++) {
+
+				if ((i <= borderWidth) || (j <= borderWidth) || (i >= pixels.length - borderWidth)
+						|| (j >= pixels[i].length - borderWidth)) {
+					pixels[i][j] = Colors.toRGB(255, 0, 0);
+				}
+			}
+		}
 		return pixels;
 	}
 
