@@ -15,7 +15,13 @@ public class Aufgabe2 {
 	public static int convertColorToGrayscale(int rgb) {
 		// TODO: implement me!
 
-		return rgb / 3;
+		// Get the red, green and blue percentage of each pixel und average of the total.
+		int average = (Colors.getR(rgb) + Colors.getG(rgb) + Colors.getB(rgb)) / 3;
+
+		// Get the grey colour
+		int grey = Colors.toRGB(average, average, average);
+
+		return grey;
 	}
 
 	/**
@@ -30,16 +36,9 @@ public class Aufgabe2 {
 		for (int i = 0; i < pixels.length; i++) {
 			for (int j = 0; j < pixels[i].length; j++) {
 
-				// Get the red, green and blue percentage of each pixel.
-				int red = Colors.getR(pixels[i][j]);
-				int green = Colors.getG(pixels[i][j]);
-				int blue = Colors.getB(pixels[i][j]);
-
-				// Get the average of them all.
-				int nummer = convertColorToGrayscale(red + green + blue);
-
 				// Set the current pixel to the average value of red, blue and green..
-				pixels[i][j] = Colors.toRGB(nummer, nummer, nummer);
+				pixels[i][j] = convertColorToGrayscale(pixels[i][j]);
+
 			}
 		}
 		return pixels;
@@ -120,7 +119,27 @@ public class Aufgabe2 {
 	 */
 	public static int[][] extendPictureWithBorder(int[][] pixels, int borderWidth, int borderColor) {
 		// TODO: implement me!
-		return pixels;
+		int[][] originalesBildArray = pixels;
+
+		int[][] neuesBildArray = new int[originalesBildArray.length + (borderWidth)][originalesBildArray[0].length
+				+ (borderWidth)];
+
+		for (int i = 0; i < neuesBildArray.length; i++) {
+			for (int j = 0; j < neuesBildArray[i].length; j++) {
+
+				if ((i >= borderWidth) && (j >= borderWidth) && (i <= neuesBildArray.length - borderWidth)
+						&& (j <= neuesBildArray[i].length - borderWidth)) {
+					// neuesBildArray[i][j] = Colors.toRGB(255, 0, 0);
+					if (i < originalesBildArray.length && j < originalesBildArray[0].length) {
+						neuesBildArray[i][j] = originalesBildArray[i][j];
+					}
+				} else {
+					neuesBildArray[i][j] = borderColor;
+				}
+			}
+		}
+
+		return neuesBildArray;
 	}
 
 	/**
