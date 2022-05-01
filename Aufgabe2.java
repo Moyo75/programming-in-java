@@ -119,27 +119,27 @@ public class Aufgabe2 {
 	 */
 	public static int[][] extendPictureWithBorder(int[][] pixels, int borderWidth, int borderColor) {
 		// TODO: implement me!
-		int[][] originalesBildArray = pixels;
+		int[][] extendedPicture = new int[pixels.length + (borderWidth * 2)][pixels[0].length + (borderWidth * 2)];
 
-		int[][] neuesBildArray = new int[originalesBildArray.length + (borderWidth)][originalesBildArray[0].length
-				+ (borderWidth)];
-
-		for (int i = 0; i < neuesBildArray.length; i++) {
-			for (int j = 0; j < neuesBildArray[i].length; j++) {
-
-				if ((i >= borderWidth) && (j >= borderWidth) && (i <= neuesBildArray.length - borderWidth)
-						&& (j <= neuesBildArray[i].length - borderWidth)) {
-					// neuesBildArray[i][j] = Colors.toRGB(255, 0, 0);
-					if (i < originalesBildArray.length && j < originalesBildArray[0].length) {
-						neuesBildArray[i][j] = originalesBildArray[i][j];
-					}
-				} else {
-					neuesBildArray[i][j] = borderColor;
+		// creates the border in the new array
+		for (int i = 0; i < extendedPicture.length; i++) {
+			for (int j = 0; j < extendedPicture[i].length; j++) {
+				if ((i <= borderWidth) || (j <= borderWidth) || (j >= extendedPicture[i].length - borderWidth)
+						|| (i >= extendedPicture.length - borderWidth)) {
+					extendedPicture[i][j] = borderColor;
 				}
+
 			}
 		}
 
-		return neuesBildArray;
+		// puts the image within the border
+		for (int i = 0; i < pixels.length; i++) {
+			for (int j = 0; j < pixels[i].length; j++) {
+				extendedPicture[i + borderWidth][j + borderWidth] = pixels[i][j];
+			}
+		}
+
+		return extendedPicture;
 	}
 
 	/**
@@ -150,7 +150,14 @@ public class Aufgabe2 {
 	 */
 	public static int[][] rotatePicture(int[][] pixels) {
 		// TODO: implement me!
-		return pixels;
+		int[][] gedrehtesBild = new int[pixels[0].length][pixels.length];
+		for (int i = 0; i < pixels.length; i++) {
+			for (int j = 0; j < pixels[i].length; j++) {
+				gedrehtesBild[j][gedrehtesBild[0].length - 1 - i] = pixels[i][j];
+			}
+		}
+
+		return gedrehtesBild;
 	}
 
 	/**
@@ -163,6 +170,12 @@ public class Aufgabe2 {
 	 */
 	public static int computeShrinkedSize(int length, int n) {
 		// TODO: implement me!
+		if (length % n > 0) {
+			length = length / n + 1;
+		} else {
+			length = length / n;
+		}
+
 		return length;
 	}
 
