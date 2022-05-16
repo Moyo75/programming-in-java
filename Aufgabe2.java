@@ -189,7 +189,15 @@ public class Aufgabe2 {
 	 */
 	public static int[][] shrinkPicture(int[][] pixels, int n) {
 		// TODO: implement me!
-		return pixels;
+		int[][] shrinkedPicture = new int[computeShrinkedSize(pixels.length, n)][computeShrinkedSize(pixels[0].length,n)];
+
+		for (int i = 0; i < pixels.length; i++) {
+			for (int j = 0; j < pixels[0].length; j++) {
+				shrinkedPicture[i][j] = pixels[i * n][j * n];
+			}
+		}
+
+		return shrinkedPicture;
 	}
 
 	/**
